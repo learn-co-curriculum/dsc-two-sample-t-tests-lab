@@ -12,6 +12,7 @@ You will be able to
 * Visually represent the t-test and p-value using the t-distribution
 * Understand how the t-test and frequentist hypothesis testing relate to the concepts of signal and noise
 
+The two-sample t-test  is used to determine if two population means are equal. A common application is to test if a new process or treatment is superior to a current process or treatment.
 
 ## Example: 
 
@@ -64,8 +65,22 @@ Let's plot both samples' distributions and inspect the overlap.
 
 
 ```python
-# Draw a plot showing overlapping of distribution means and sds for incpection
+sns.set(color_codes=True)
+sns.set(rc={'figure.figsize':(12,10)})
+sns.distplot(control) # Blue distribution
+sns.distplot(experimental) # Green distribution
 ```
+
+
+
+
+    <matplotlib.axes._subplots.AxesSubplot at 0x2412e1adda0>
+
+
+
+
+![png](index_files/index_6_1.png)
+
 
 So we are able to see some slight differences in the mean and standard deviation od control and experimental groups. This is a good sign to further our experimentation and to calculate whether the difference is significant, or not. 
 
@@ -91,10 +106,20 @@ First we need to calculate the mean difference between bpoth groups.
 
 
 ```python
-# Calculate difference between distribution means
+# Difference between distribution means
+control.mean()
+experimental.mean()
+experimental.mean() - control.mean()
 
 # -9.819999999999993
 ```
+
+
+
+
+    -9.819999999999993
+
+
 
 What is the probability that we observed this data GIVEN a specified mean difference in blood pressure.
 
@@ -120,8 +145,8 @@ where n is the number of samples
 
 ```python
 def variance(sample):
-    
-    return None
+    sample_mean = np.mean(sample)
+    return sum([(i - sample_mean)**2 for i in sample])
 ```
 
 Using above function, we can now write another function to calculate $S2$
@@ -129,8 +154,9 @@ Using above function, we can now write another function to calculate $S2$
 
 ```python
 def sample_variance(sample1, sample2):
-    
-    return None
+    n_1, n_2 = len(sample1), len(sample2)
+    var_1, var_2 = variance(sample1), variance(sample2)
+    return (var_1 + var_2)/((n_1 + n_2)-2)
 ```
 
 Now that we have S2, we can easily calculate the two sample t-statistic using the formula goven earlier. 
@@ -138,37 +164,28 @@ Now that we have S2, we can easily calculate the two sample t-statistic using th
 
 ```python
 def twosample_tstatistic(expr, ctrl):
+    exp_mean, ctrl_mean = np.mean(expr), np.mean(ctrl)
+    samp_var = sample_variance(expr, ctrl)
+    n_e, n_c = len(expr), len(ctrl)
+    num = exp_mean - ctrl_mean
+    denom = np.sqrt(samp_var * ((1/n_e)+(1/n_c)))
+    return num / denom
 
-    return None
-
-t_stat = None
+t_stat = twosample_tstatistic(experimental, control)
+t_stat
 # -1.8915462966190268
 ```
+
+
+
+
+    -1.8915462966190268
+
+
 
 Using the data we have upto this point, we can visualize the t-statistic with t-statistic and calculate the area under curve to calculate our p-value. 
 
 Let's write a function that ingests the calculated t-statistic, control and experimental group lengths to identify critical boundaries. 
-
-
-```python
-# Visualize t and p_value
-
-def visualize_t(t_stat, n_control, n_experimental):
-
-    # initialize a matplotlib "figure"
-
-    # generate points on the x axis between -4 and 4:
- 
-    # use stats.t.pdf to get values on the probability density function for the t-distribution
-    
-    # Draw two sided boundary for critical-t
-
-    return None
-
-n_control = None
-n_experimental = None
-visualize_t(t_stat, n_control, n_experimental)
-```
 
 
 ```python
@@ -177,19 +194,30 @@ visualize_t(t_stat, n_control, n_experimental)
 def visualize_t(t_stat, n_control, n_experimental):
 
     # initialize a matplotlib "figure"
-
+    fig = plt.figure(figsize=(8,5))
+    ax = fig.gca()
     # generate points on the x axis between -4 and 4:
- 
+    xs = np.linspace(-4, 4, 500)
+
     # use stats.t.pdf to get values on the probability density function for the t-distribution
     
-    # Draw two sided boundary for critical-t
+    ys= stats.t.pdf(xs, (n_control+n_experimental-2), 0, 1)
+    ax.plot(xs, ys, linewidth=3, color='darkred')
 
+    ax.axvline(t_stat, color='black', linestyle='--', lw=5)
+    ax.axvline(-t_stat, color='black', linestyle='--', lw=5)
+
+    plt.show()
     return None
 
 n_control = len(control)
 n_experimental = len(experimental)
 visualize_t(t_stat, n_control, n_experimental)
 ```
+
+
+![png](index_files/index_19_0.png)
+
 
 Now that we have defined our boundaries for significance, we can simply calculate p_value by calculating the total area under curve using `stats.t.cdf()`. 
 
@@ -207,12 +235,22 @@ p_value = lower_tail+upper_tail
 print(p_value)
 ```
 
+    0.061713104303855605
+
+
 To verify our results, we can use SciPy's functions to calculate the p_value in a one liner. 
 
 
 ```python
 stats.t.sf(abs(t_stat), len(experimental)+len(control)-1) * 2
 ```
+
+
+
+
+    0.06147434803316479
+
+
 
 
 ```python
@@ -226,6 +264,13 @@ populations have identical variances by default.
 
 stats.ttest_ind(experimental, control)
 ```
+
+
+
+
+    Ttest_indResult(statistic=-1.8915462966190273, pvalue=0.061504240672530394)
+
+
 
 ## Summary
 In this lesson, we ran hypothesis testing using frequestists methods with t-values and p-values. We saw how a twoe sample t-test can be applied to contexts where the population and sample mean are known and we have limited amount of sample data. We looked at all the stages required for such hypothesis testing with a description of steps and also, how to perform these functions in Python. The lesson also highlight SciPy functions that can be used to calculate test statistics and p-value as a way to verify the calculation performed during the lesson. 
