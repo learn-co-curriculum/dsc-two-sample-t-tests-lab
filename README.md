@@ -1,5 +1,5 @@
 
-## Two sample t-test
+## Two sample T-Test - Lab
 
 ## Introduction
 
@@ -14,7 +14,7 @@ You will be able to
 
 The two-sample t-test  is used to determine if two population means are equal. A common application is to test if a new process or treatment is superior to a current process or treatment.
 
-## Example: 
+## Example
 
 Consider the following experimental settings for clinical trials of a new blood pressure medicine. 
 
@@ -74,7 +74,7 @@ sns.distplot(experimental) # Green distribution
 
 
 
-    <matplotlib.axes._subplots.AxesSubplot at 0x2412e1adda0>
+    <matplotlib.axes._subplots.AxesSubplot at 0x1a1f028358>
 
 
 
@@ -84,13 +84,13 @@ sns.distplot(experimental) # Green distribution
 
 So we are able to see some slight differences in the mean and standard deviation od control and experimental groups. This is a good sign to further our experimentation and to calculate whether the difference is significant, or not. 
 
-### The Null Hypothesis
+## The Null Hypothesis
 
 In our drug efficacy experiment example, we can define our null hypothesis to be that there is no difference between a subject taking a placebo and and the treatment drug.
 
 >**Ho: The mean difference between treatment and control groups is zero. i.e. Ho = Ha**
 
-### The Alternate Hypothesis
+## The Alternate Hypothesis
 
 The alternate hypothesis is the outcome of the experiment that we hope to show. In our example the alternative hypothesis is that there is in fact a mean difference in blood pressure between the treatment and control groups.
 
@@ -125,12 +125,12 @@ What is the probability that we observed this data GIVEN a specified mean differ
 
 We obviously don't know the true mean difference in blood pressure resulting from the drug. The whole point of conducting the experiment is to evaluate the drug. Instead we will assume that the true mean difference is zero: the null hypothesis H0 is assumed to be true:
 
-### Calculating the t-statistic
+## Calculating the t-statistic
 When comparing the difference between groups, we can calculate the two-sample t-statistic like so:
 
 ![](https://www.statsdirect.co.uk/help/generatedimages/equations/equation167.svg)
 
-### Calculating sample variance
+## Calculating sample variance
 The $s^2$ denotes our sample variance. In this version of the t-test we are assuming equal variances in our experimental and control groups in the overall population. There is another way to calculate the t-test where equal variance is not assumed, but in our case it is a reasonable assumption.
 
 This approach combines the variance of the two group's variance measurements into a single, pooled metric.
@@ -235,7 +235,7 @@ p_value = lower_tail+upper_tail
 print(p_value)
 ```
 
-    0.061713104303855605
+    0.061713104303855494
 
 
 To verify our results, we can use SciPy's functions to calculate the p_value in a one liner. 
