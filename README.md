@@ -1,12 +1,12 @@
 
-## Two sample t-test
+# Two Sample T-Test - Lab
 
 ## Introduction
 
 The two-sample t-test  is used to determine if two population means are equal. A common application is to test if a new process or treatment is superior to a current process or treatment.
 
 ## Objectives
-You will be able to
+You will be able to:
 * Understand the t-statistic, p-value, and t-test for 2 sample t-test
 * Calculate the t-statistic and p-value using formulas as well as Scipy functions
 * Visually represent the t-test and p-value using the t-distribution
@@ -69,13 +69,13 @@ Let's plot both samples' distributions and inspect the overlap.
 
 So we are able to see some slight differences in the mean and standard deviation od control and experimental groups. This is a good sign to further our experimentation and to calculate whether the difference is significant, or not. 
 
-### The Null Hypothesis
+## The Null Hypothesis
 
 In our drug efficacy experiment example, we can define our null hypothesis to be that there is no difference between a subject taking a placebo and and the treatment drug.
 
 >**Ho: The mean difference between treatment and control groups is zero. i.e. Ho = Ha**
 
-### The Alternate Hypothesis
+## The Alternate Hypothesis
 
 The alternate hypothesis is the outcome of the experiment that we hope to show. In our example the alternative hypothesis is that there is in fact a mean difference in blood pressure between the treatment and control groups.
 
@@ -100,12 +100,12 @@ What is the probability that we observed this data GIVEN a specified mean differ
 
 We obviously don't know the true mean difference in blood pressure resulting from the drug. The whole point of conducting the experiment is to evaluate the drug. Instead we will assume that the true mean difference is zero: the null hypothesis H0 is assumed to be true:
 
-### Calculating the t-statistic
+## Calculating the t-statistic
 When comparing the difference between groups, we can calculate the two-sample t-statistic like so:
 
 ![](https://www.statsdirect.co.uk/help/generatedimages/equations/equation167.svg)
 
-### Calculating sample variance
+## Calculating sample variance
 The $s^2$ denotes our sample variance. In this version of the t-test we are assuming equal variances in our experimental and control groups in the overall population. There is another way to calculate the t-test where equal variance is not assumed, but in our case it is a reasonable assumption.
 
 This approach combines the variance of the two group's variance measurements into a single, pooled metric.
