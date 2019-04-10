@@ -89,10 +89,10 @@ NOTE: The null hypothesis and alternative hypothesis are concerned with the true
 
 First we need to calculate the mean difference between bpoth groups.
 
-
-```python
 # Calculate difference between distribution means
 
+
+```python
 # -9.819999999999993
 ```
 
@@ -172,27 +172,6 @@ def visualize_t(t_stat, n_control, n_experimental):
 
 n_control = None
 n_experimental = None
-visualize_t(t_stat, n_control, n_experimental)
-```
-
-
-```python
-# Visualize p_value
-
-def visualize_t(t_stat, n_control, n_experimental):
-
-    # initialize a matplotlib "figure"
-
-    # generate points on the x axis between -4 and 4:
- 
-    # use stats.t.pdf to get values on the probability density function for the t-distribution
-    
-    # Draw two sided boundary for critical-t
-
-    return None
-
-n_control = len(control)
-n_experimental = len(experimental)
 visualize_t(t_stat, n_control, n_experimental)
 ```
 
