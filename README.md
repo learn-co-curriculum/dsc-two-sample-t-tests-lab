@@ -22,11 +22,11 @@ In the context of controlled experiments, you will often see talk about the "con
 
 >The 50 subjects in the control group have an average systolic blood pressure of 121.38 who have been given a placebo drug.
 
->The 50 subjects in the experimental / treatment group have an average systolic blood pressure of 111.56 after treatment with drug under test. 
+>The 50 subjects in the experimental / treatment group have an average systolic blood pressure of 111.56 after treatment with the drug being tested. 
 
 The apparent difference between experimental and control groups is -9.82 points. But with 50 subjects in each group, how confident can we be that this measured difference is real? We can perform what is known as a t-test to evaluate this.
 
-First you will calculate a t-statistic for 2 sample t-test, followed by calculation of p-value. 
+First, you will calculate a t-statistic for 2 sample t-test, followed by calculation of p-value. 
 
 You can set up the experimental and control observations below as numpy arrays. First, make sure to import necessary libraries
 
@@ -67,11 +67,11 @@ Let's plot both samples' distributions and inspect the overlap.
 # Draw a plot showing overlapping of distribution means and sds for incpection
 ```
 
-So we are able to see some slight differences in the mean and standard deviation of control and experimental groups. This is a good sign to further our experimentation and to calculate whether the difference is significant, or not. 
+There are some slight differences between the mean and standard deviation of the control and experimental groups. This is a good sign to further our experimentation and to calculate whether the difference is significant, or not. 
 
 ## The Null Hypothesis
 
-In our drug efficacy experiment example, we can define our null hypothesis to be that there is no difference between a subject taking a placebo and and the treatment drug.
+In thus drug efficacy experiment example, you can define our null hypothesis to be that there is no difference between a subject taking a placebo and the treatment drug.
 
 >**$H_{0}$: The mean difference between treatment and control groups is zero. i.e. $H_{0} = H_{1}$**
 
@@ -85,9 +85,9 @@ The alternate hypothesis is the outcome of the experiment that we hope to show. 
 
 >**$H_{1}$ (1-tailed, <): The parameter of interest, our mean difference between treatment and control, is less than zero.**
 
-NOTE: The null hypothesis and alternative hypothesis are concerned with the true values, or in other words the parameter of the overall population. Through the process of experimentation / hypothesis testing and statistical analysis of the results we will make an inference about this population parameter.
+NOTE: The null hypothesis and alternative hypothesis are concerned with the true values, or in other words the parameter of the overall population. Through the process of experimentation/hypothesis testing and statistical analysis of the results, we will make an inference about this population parameter.
 
-First we need to calculate the mean difference between both groups.
+First, we need to calculate the mean difference between both groups.
 
 
 ```python
@@ -134,7 +134,7 @@ def sample_variance(sample1, sample2):
     return None
 ```
 
-Now that we have S2, create a function `twosample_tstatistic` to calculate the two sample t-statistic using the formula goven earlier. 
+Now that we have S2, create a function `twosample_tstatistic` to calculate the two sample t-statistic using the formula given earlier. 
 
 
 ```python
@@ -146,9 +146,9 @@ t_stat = None
 # -1.8915462966190268
 ```
 
-Using the data from the samples, you can now determine the critical values with the t-statistic and calculate the area under curve to determine the p-value. 
+Using the data from the samples, you can now determine the critical values with the t-statistic and calculate the area under the curve to determine the p-value. 
 
-Write a function `visualize_t` that uses matplotlib to display a standard t-distribution with vertical lines indentifying each critical value that signifies the rejection region.
+Write a function `visualize_t` that uses matplotlib to display a standard t-distribution with vertical lines identifying each critical value that signifies the rejection region.
 
 
 ```python
@@ -208,4 +208,4 @@ stats.ttest_ind(experimental, control)
 ```
 
 ## Summary
-In this lesson, you ran hypothesis testing using frequestists methods with t-values and p-values. You saw how a two sample t-test can be applied to contexts where the population and sample mean are known and you have a limited amount of sample data. You looked at all the stages required for such hypothesis testing with a description of the steps and also how to perform these functions in python. You also used built-in SciPy functions to calculate test statistics and p-value as a way to verify the manual calculations performed. 
+In this lesson, you ran hypothesis testing using frequentists methods with t-values and p-values. You saw how a two sample t-test can be applied to contexts where the population and sample mean are known and you have a limited amount of sample data. You looked at all the stages required for such hypothesis testing with a description of the steps and also how to perform these functions in python. You also used built-in SciPy functions to calculate test statistics and p-value as a way to verify the manual calculations performed. 
