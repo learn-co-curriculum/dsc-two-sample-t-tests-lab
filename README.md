@@ -73,17 +73,17 @@ So we are able to see some slight differences in the mean and standard deviation
 
 In our drug efficacy experiment example, we can define our null hypothesis to be that there is no difference between a subject taking a placebo and and the treatment drug.
 
->**Ho: The mean difference between treatment and control groups is zero. i.e. Ho = Ha**
+>**$H_{0}$: The mean difference between treatment and control groups is zero. i.e. $Ho = Ha$**
 
 ## The Alternate Hypothesis
 
 The alternate hypothesis is the outcome of the experiment that we hope to show. In our example the alternative hypothesis is that there is in fact a mean difference in blood pressure between the treatment and control groups.
 
->**H1 (2-tailed): The parameter of interest, our mean difference between treatment and control, is different than zero.**
+>**$H_{1}$ (2-tailed): The parameter of interest, our mean difference between treatment and control, is different than zero.**
 
->**H1 (1-tailed, >): The parameter of interest, our mean difference between treatment and control, is greater than zero.**
+>**$H_{1}$ (1-tailed, >): The parameter of interest, our mean difference between treatment and control, is greater than zero.**
 
->**H1 (1-tailed, <): The parameter of interest, our mean difference between treatment and control, is less than zero.**
+>**$H_{1}$ (1-tailed, <): The parameter of interest, our mean difference between treatment and control, is less than zero.**
 
 NOTE: The null hypothesis and alternative hypothesis are concerned with the true values, or in other words the parameter of the overall population. Through the process of experimentation / hypothesis testing and statistical analysis of the results we will make an inference about this population parameter.
 
@@ -103,7 +103,10 @@ We obviously don't know the true mean difference in blood pressure resulting fro
 ## Calculating the t-statistic
 When comparing the difference between groups, we can calculate the two-sample t-statistic like so:
 
-![](https://www.statsdirect.co.uk/help/generatedimages/equations/equation167.svg)
+## $$ t = \frac{\bar{x}_{1} - \bar{x}_{2}}{\sqrt{s^{2} (\frac{1}{n_{1}} + \frac{1}{n_{2}}) }    }  $$
+
+
+### $$ s^{2} = \frac{\sum_{i=1}^{n_{1}}(x_{i} - \bar{x}_{1})^{2} + \sum_{j=1}^{n_{2}}(x_{j} - \bar{x}_{2})^{2} }    {n_{1} + n_{2} -2}  $$
 
 ## Calculating sample variance
 The $s^2$ denotes our sample variance. In this version of the t-test we are assuming equal variances in our experimental and control groups in the overall population. There is another way to calculate the t-test where equal variance is not assumed, but in our case it is a reasonable assumption.
@@ -113,7 +116,9 @@ This approach combines the variance of the two group's variance measurements int
 Let's create some functions to calculate the t-statistic. 
 
 Write a function to calculate a sample variance. i.e. 
-> $∑i=1-n((sample(i) - mean(sample))^2 $
+
+
+> ## $ s^{2} = \frac{\sum_{i=1}^{n}(x_{i} - \bar{x})^{2}}{n-1} $
 
 where n is the number of samples
 
