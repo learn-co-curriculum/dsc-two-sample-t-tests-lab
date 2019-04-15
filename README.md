@@ -120,7 +120,7 @@ Now let's create some functions to calculate the t-statistic. The first function
 
 
 ```python
-def variance(sample):
+def sample_variance(sample):
     
     return None
 ```
@@ -129,7 +129,7 @@ Using `sample_variance`, you can now write another function `pooled_variance` to
 
 
 ```python
-def sample_variance(sample1, sample2):
+def pooled_variance(sample1, sample2):
     
     return None
 ```
