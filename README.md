@@ -24,7 +24,7 @@ In the context of controlled experiments, you will often see talk about the "con
 
 >The 50 subjects in the experimental / treatment group have an average systolic blood pressure of 111.56 after treatment with the drug being tested. 
 
-The apparent difference between experimental and control groups is -9.82 points. But with 50 subjects in each group, how confident can we be that this measured difference is real? We can perform what is known as a t-test to evaluate this.
+The apparent difference between experimental and control groups is -9.82 points. But with 50 subjects in each group, how confident can a researcher be that this measured difference is real? You can perform a two sample t-test to evaluate this.
 
 First, you will calculate a t-statistic for 2 sample t-test, followed by calculation of p-value. 
 
@@ -60,7 +60,7 @@ experimental = np.array([ 83, 100, 123,  75, 130,  77,  78,  87, 116, 116, 141, 
 ```
 
 It is always a good idea to draw the probability distributions for samples to visually inspect the differences present between mean and standard deviation. 
-Let's plot both samples' distributions and inspect the overlap. 
+Plot both samples' distributions and inspect the overlap using seaborn to get an idea how different the samples might be from one another. 
 
 
 ```python
@@ -87,17 +87,23 @@ sns.distplot(experimental) # Green distribution
 ![png](index_files/index_4_2.png)
 
 
-There are some slight differences between the mean and standard deviation of the control and experimental groups. This is a good sign to further our experimentation and to calculate whether the difference is significant, or not. 
+There are some slight differences between the mean and standard deviation of the control and experimental groups. This is a good sign to further our experimentation and to calculate whether the difference is significant, or not. As a reminder the five steps to performing a hypothesis test are:
+
+1) Set up null and alternative hypotheses   
+2) Choose a significance level   
+3) Calculate the test statistic   
+4) Determine the critical or p-value (find the rejection region)   
+5) Compare t-value with critical t-value to reject or fail to reject the null hypothesis   
 
 ## The Null Hypothesis
 
-In thus drug efficacy experiment example, you can define our null hypothesis to be that there is no difference between a subject taking a placebo and the treatment drug.
+In thus drug efficacy experiment example, you can define the null hypothesis to be that there is no difference between a subject taking a placebo and the treatment drug.
 
 >**$H_{0}$: The mean difference between treatment and control groups is zero. i.e. $H_{0} = H_{1}$**
 
 ## The Alternate Hypothesis
 
-The alternate hypothesis is the outcome of the experiment that we hope to show. In our example the alternative hypothesis is that there is in fact a mean difference in blood pressure between the treatment and control groups.
+In this example the alternative hypothesis is that there is in fact a mean difference in blood pressure between the treatment and control groups.
 
 >**$H_{1}$ (2-tailed): The parameter of interest, our mean difference between treatment and control, is different than zero.**
 
@@ -107,7 +113,8 @@ The alternate hypothesis is the outcome of the experiment that we hope to show. 
 
 NOTE: The null hypothesis and alternative hypothesis are concerned with the true values, or in other words the parameter of the overall population. Through the process of experimentation/hypothesis testing and statistical analysis of the results, we will make an inference about this population parameter.
 
-First, we need to calculate the mean difference between both groups.
+
+Now, calculate the mean difference between both groups.
 
 
 ```python
@@ -144,11 +151,11 @@ Where $s^{2}_{1}$ and $s^{2}_{2}$ are the variances for each sample given by the
 
 
 ## Calculating pooled sample variance
-The $s^2_{p}$ denotes our sample variance. In this version of the t-test we are assuming equal variances in our experimental and control groups in the overall population. There is another way to calculate the t-test where equal variance is not assumed, but in our case it is a reasonable assumption.
+The $s^2_{p}$ denotes the sample variance. In this version of the t-test you are assuming equal variances in our experimental and control groups in the overall population. There is another way to calculate the t-test where equal variance is not assumed, but in this case it is a reasonable assumption.
 
 This approach combines the variance of the two group's variance measurements into a single, pooled metric.
 
-Now let's create some functions to calculate the t-statistic. The first function to create is one that calculates the variance for a single sample.
+Now, create some functions to calculate the t-statistic. The first function to create is one that calculates the variance for a single sample.
 
 
 ```python
@@ -168,7 +175,7 @@ def pooled_variance(sample1, sample2):
     return ((n_1-1) * var_1 + (n_2-1)* var_2)/((n_1 + n_2)-2)
 ```
 
-Now that we have S2, create a function `twosample_tstatistic` to calculate the two sample t-statistic using the formula given earlier. 
+Now that you have $S_{p}^{2}$, create a function `twosample_tstatistic` to calculate the two sample t-statistic using the formula given earlier. 
 
 
 ```python
@@ -262,7 +269,7 @@ print(p_value)
     0.061713104303855494
 
 
-To verify these results, we can use SciPy's functions to calculate the p_value in a one liner. 
+To verify these results, you can use SciPy's functions to calculate the p_value in a one liner. 
 
 
 ```python
