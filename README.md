@@ -266,18 +266,6 @@ To verify these results, we can use SciPy's functions to calculate the p_value i
 
 
 ```python
-stats.t.sf(abs(t_stat), len(experimental)+len(control)-2) * 2
-```
-
-
-
-
-    0.061504240672530394
-
-
-
-
-```python
 '''
 Calculates the T-test for the means of *two independent* samples of scores.
 
