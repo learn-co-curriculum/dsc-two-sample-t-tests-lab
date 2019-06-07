@@ -144,7 +144,7 @@ $$\large t = \frac{\bar{x}_{1} - \bar{x}_{2}}{\sqrt{s^{2}_{p} (\frac{1}{n_{1}} +
 
 Where $s^{2}_{p}$ is the pooled sample variance, calculated as:
 
-$$\large s^{2}_{p}  = \frac{(n_{1} -1)s^{2}_{1} +  (n_{2} -1)s^{2}_{2}}{n_{1} + n_{2} + 2}  $$
+$$\large s^{2}_{p}  = \frac{(n_{1} -1)s^{2}_{1} +  (n_{2} -1)s^{2}_{2}}{n_{1} + n_{2} - 2}  $$
 
 Where $s^{2}_{1}$ and $s^{2}_{2}$ are the variances for each sample given by the formula 
 $$ \large s^{2} = \frac{\sum_{i=1}^{n}(x_{i} - \bar{x})^{2}}{n-1} $$
