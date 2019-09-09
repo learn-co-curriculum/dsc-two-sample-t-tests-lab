@@ -45,6 +45,20 @@ sns.set_style('whitegrid')
 
 
 ```python
+# __SOLUTION__ 
+import numpy as np
+from scipy import stats
+import seaborn as sns
+import matplotlib.pyplot as plt
+
+sns.set_style('whitegrid')
+
+%config InlineBackend.figure_format = 'retina'
+%matplotlib inline
+```
+
+
+```python
 # Use this sample data to conduct experimentation
 
 control = np.array([166, 165, 120,  94, 104, 166,  98,  85,  97,  87, 114, 100, 152,
@@ -57,20 +71,6 @@ experimental = np.array([ 83, 100, 123,  75, 130,  77,  78,  87, 116, 116, 141, 
                          97,  95, 104, 141,  80, 110, 136, 134, 142, 135, 111,  83,  86,
                          116,  86, 117,  87, 143, 104, 107,  86,  88, 124,  76])
 
-```
-
-
-```python
-# __SOLUTION__ 
-import numpy as np
-from scipy import stats
-import seaborn as sns
-import matplotlib.pyplot as plt
-
-sns.set_style('whitegrid')
-
-%config InlineBackend.figure_format = 'retina'
-%matplotlib inline
 ```
 
 
@@ -107,16 +107,14 @@ sns.distplot(control) # Blue distribution
 sns.distplot(experimental) # Green distribution
 ```
 
-    /Users/forest.polchow/anaconda3/lib/python3.6/site-packages/matplotlib/axes/_axes.py:6462: UserWarning: The 'normed' kwarg is deprecated, and has been replaced by the 'density' kwarg.
-      warnings.warn("The 'normed' kwarg is deprecated, and has been "
-    /Users/forest.polchow/anaconda3/lib/python3.6/site-packages/matplotlib/axes/_axes.py:6462: UserWarning: The 'normed' kwarg is deprecated, and has been replaced by the 'density' kwarg.
-      warnings.warn("The 'normed' kwarg is deprecated, and has been "
+    /anaconda3/envs/learn-env/lib/python3.6/site-packages/scipy/stats/stats.py:1713: FutureWarning: Using a non-tuple sequence for multidimensional indexing is deprecated; use `arr[tuple(seq)]` instead of `arr[seq]`. In the future this will be interpreted as an array index, `arr[np.array(seq)]`, which will result either in an error or a different result.
+      return np.add.reduce(sorted[indexer] * weights, axis=axis) / sumval
 
 
 
 
 
-    <matplotlib.axes._subplots.AxesSubplot at 0x1a19230240>
+    <matplotlib.axes._subplots.AxesSubplot at 0x10ccf0da0>
 
 
 
@@ -315,21 +313,23 @@ def visualize_t(t_stat, n_control, n_experimental):
     None
     
     """
-
     # initialize a matplotlib "figure"
     fig = plt.figure(figsize=(8,5))
     ax = fig.gca()
     # generate points on the x axis between -4 and 4:
     xs = np.linspace(-4, 4, 500)
 
+    # use stats.t.ppf to get critical value. For alpha = 0.05 and two tailed test
+    crit = stats.t.ppf(1-0.025, (n_control+n_experimental-2))
+    
     # use stats.t.pdf to get values on the probability density function for the t-distribution
     
     ys= stats.t.pdf(xs, (n_control+n_experimental-2), 0, 1)
     ax.plot(xs, ys, linewidth=3, color='darkred')
 
-    ax.axvline(t_stat, color='black', linestyle='--', lw=5)
-    ax.axvline(-t_stat, color='black', linestyle='--', lw=5)
-
+    ax.axvline(crit, color='black', linestyle='--', lw=5)
+    ax.axvline(-crit, color='black', linestyle='--', lw=5)
+    
     plt.show()
     return None
 
