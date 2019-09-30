@@ -3,12 +3,12 @@
 
 ## Introduction
 
-The two-sample t-test  is used to determine if two population means are equal. A common application is to test if a new process or treatment is superior to a current process or treatment.
+The two sample t-test  is used to determine if two population means are equal. A common application is to test if a new process or treatment is superior to a current process or treatment.
 
 ## Objectives
 You will be able to:
-* Understand the t-statistic, p-value, and t-test for 2 sample t-test
-* Calculate the t-statistic and p-value using formulas as well as Scipy functions
+* Understand the t-statistic, p-value, and t-test for the 2 sample t-test
+* Calculate the t-statistic and p-value using formulas as well as SciPy functions
 * Visually represent the t-test and p-value using the t-distribution
 * Understand how the t-test and frequentist hypothesis testing relate to the concepts of signal and noise
 
@@ -26,9 +26,9 @@ In the context of controlled experiments, you will often see talk about the "con
 
 The apparent difference between experimental and control groups is -9.82 points. But with 50 subjects in each group, how confident can a researcher be that this measured difference is real? You can perform a two sample t-test to evaluate this.
 
-First, you will calculate a t-statistic for 2 sample t-test, followed by calculation of p-value. 
+First, you will calculate a t-statistic for a 2 sample t-test, the calculate a p-value. 
 
-You can set up the experimental and control observations below as numpy arrays. First, make sure to import necessary libraries
+You can set up the experimental and control observations below as NumPy arrays. First, make sure to import necessary libraries
 
 
 ```python
@@ -60,7 +60,7 @@ experimental = np.array([ 83, 100, 123,  75, 130,  77,  78,  87, 116, 116, 141, 
 ```
 
 It is always a good idea to draw the probability distributions for samples to visually inspect the differences present between mean and standard deviation. 
-Plot both samples' distributions and inspect the overlap using seaborn to get an idea how different the samples might be from one another. 
+Plot both samples' distributions and inspect the overlap using seaborn to get an idea of how different the samples might be from one another. 
 
 
 ```python
@@ -70,19 +70,15 @@ sns.distplot(control) # Blue distribution
 sns.distplot(experimental) # Green distribution
 ```
 
-    /anaconda3/envs/learn-env/lib/python3.6/site-packages/scipy/stats/stats.py:1713: FutureWarning: Using a non-tuple sequence for multidimensional indexing is deprecated; use `arr[tuple(seq)]` instead of `arr[seq]`. In the future this will be interpreted as an array index, `arr[np.array(seq)]`, which will result either in an error or a different result.
-      return np.add.reduce(sorted[indexer] * weights, axis=axis) / sumval
+
+
+
+    <matplotlib.axes._subplots.AxesSubplot at 0x1a1ef60710>
 
 
 
 
-
-    <matplotlib.axes._subplots.AxesSubplot at 0x10ccf0da0>
-
-
-
-
-![png](index_files/index_4_2.png)
+![png](index_files/index_4_1.png)
 
 
 There are some slight differences between the mean and standard deviation of the control and experimental groups. This is a good sign to further our experimentation and to calculate whether the difference is significant, or not. As a reminder the five steps to performing a hypothesis test are:
@@ -101,7 +97,7 @@ In thus drug efficacy experiment example, you can define the null hypothesis to 
 
 ## The Alternate Hypothesis
 
-In this example the alternative hypothesis is that there is in fact a mean difference in blood pressure between the treatment and control groups.
+In this example, the alternative hypothesis is that there is in fact a mean difference in blood pressure between the treatment and control groups.
 
 >**$H_{1}$ (2-tailed): The parameter of interest, our mean difference between treatment and control, is different than zero.**
 
@@ -110,7 +106,6 @@ In this example the alternative hypothesis is that there is in fact a mean diffe
 >**$H_{1}$ (1-tailed, <): The parameter of interest, our mean difference between treatment and control, is less than zero.**
 
 NOTE: The null hypothesis and alternative hypothesis are concerned with the true values, or in other words the parameter of the overall population. Through the process of experimentation/hypothesis testing and statistical analysis of the results, we will make an inference about this population parameter.
-
 
 Now, calculate the mean difference between both groups.
 
@@ -133,7 +128,7 @@ experimental.mean() - control.mean()
 
 What is the probability that you would observe this data GIVEN a specified mean difference in blood pressure?
 
-You obviously don't know the true mean difference in blood pressure resulting from administration the drug. The whole point of conducting the experiment is to evaluate the drug. Instead you must assume that the true mean difference is zero: the null hypothesis $H_{0}$ is assumed to be true:
+You obviously don't know the true mean difference in blood pressure resulting from administration of the drug. The whole point of conducting the experiment is to evaluate the drug. Instead, you must assume that the true mean difference is zero: the null hypothesis $H_{0}$ is assumed to be true:
 
 ## Calculating the t-statistic
 When comparing the difference between groups, we can calculate the two-sample t-statistic like so:
@@ -149,7 +144,7 @@ $$ \large s^{2} = \frac{\sum_{i=1}^{n}(x_{i} - \bar{x})^{2}}{n-1} $$
 
 
 ## Calculating pooled sample variance
-The $s^2_{p}$ denotes the sample variance. In this version of the t-test you are assuming equal variances in our experimental and control groups in the overall population. There is another way to calculate the t-test where equal variance is not assumed, but in this case it is a reasonable assumption.
+The $s^2_{p}$ denotes the sample variance. In this version of the t-test, you are assuming equal variances in our experimental and control groups in the overall population. There is another way to calculate the t-test where equal variance is not assumed, but in this case, it is a reasonable assumption.
 
 This approach combines the variance of the two group's variance measurements into a single, pooled metric.
 
@@ -163,7 +158,7 @@ def sample_variance(sample):
     
 ```
 
-Using `sample_variance`, you can now write another function `pooled_variance` to calculate $S_{p}^{2}$
+Using `sample_variance`, you can now write another function `pooled_variance` to calculate $s_{p}^{2}$
 
 
 ```python
@@ -173,7 +168,7 @@ def pooled_variance(sample1, sample2):
     return ((n_1-1) * var_1 + (n_2-1)* var_2)/((n_1 + n_2)-2)
 ```
 
-Now that you have $S_{p}^{2}$, create a function `twosample_tstatistic` to calculate the two sample t-statistic using the formula given earlier. 
+Now that you have $s_{p}^{2}$, create a function `twosample_tstatistic` to calculate the two sample t-statistic using the formula given earlier. 
 
 
 ```python
@@ -250,9 +245,9 @@ visualize_t(t_stat, n_control, n_experimental)
 ![png](index_files/index_14_0.png)
 
 
-Now that you have defined your boundaries for significance, you can simply calculate p_value by calculating the total area under curve using `stats.t.cdf()`. 
+Now that you have defined your boundaries for significance, you can simply calculate the p-value by calculating the total area under curve using `stats.t.cdf()`. 
 
-Given a t-value and a degrees of freedom, you can use the "survival function" sf of scipy.stats.t (aka the complementary CDF) to compute the one-sided p-value. For the two-sided p-value, just double the one-sided p-value.
+Given a t-value and the degrees of freedom, you can use the "survival function", `sf` of `scipy.stats.t` (aka the complementary CDF) to compute the one-sided p-value. For the two-sided p-value, just double the one-sided p-value.
 
 
 ```python
@@ -274,7 +269,7 @@ To verify these results, you can use SciPy's functions to calculate the p_value 
 
 ```python
 '''
-Calculates the T-test for the means of *two independent* samples of scores.
+Calculates the ttest for the means of *two independent* samples of scores.
 
 This is a two-sided test for the null hypothesis that 2 independent samples
 have identical average (expected) values. This test assumes that the
