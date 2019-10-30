@@ -3,15 +3,14 @@
 
 ## Introduction
 
-The two sample t-test  is used to determine if two population means are equal. A common application is to test if a new process or treatment is superior to a current process or treatment.
+The two sample t-test is used to determine if two population means are equal. A common application is to test if a new process or treatment is superior to a current process or treatment.
 
 ## Objectives
-You will be able to:
-* Understand the t-statistic, p-value, and t-test for the 2 sample t-test
-* Calculate the t-statistic and p-value using formulas as well as SciPy functions
-* Visually represent the t-test and p-value using the t-distribution
-* Understand how the t-test and frequentist hypothesis testing relate to the concepts of signal and noise
 
+You will be able to:
+
+* Perform a two-sample t-test and make conclusions about an experiment based on the results
+* Visually represent the t-test and p-value using the t-distribution
 
 ## Example: 
 
@@ -19,16 +18,17 @@ Consider the following experimental settings for clinical trials of a new blood 
 
 In the context of controlled experiments, you will often see talk about the "control" group and the "experimental" or "treatment" group. In a drug test example, the control group is the group given the placebo and the treatment group is given the actual drug. Researchers are interested in the average difference in blood pressure levels between the treatment and control groups.
 
-
 >The 50 subjects in the control group have an average systolic blood pressure of 121.38 who have been given a placebo drug.
 
 >The 50 subjects in the experimental / treatment group have an average systolic blood pressure of 111.56 after treatment with the drug being tested. 
 
 The apparent difference between experimental and control groups is -9.82 points. But with 50 subjects in each group, how confident can a researcher be that this measured difference is real? You can perform a two sample t-test to evaluate this.
 
-First, you will calculate a t-statistic for a 2 sample t-test, the calculate a p-value. 
+First, you will calculate a t-statistic for a 2-sample t-test, then calculate a p-value. 
 
-You can set up the experimental and control observations below as NumPy arrays. First, make sure to import necessary libraries
+The experimental and control observations are given below as NumPy arrays. 
+
+First, let's make sure to import necessary libraries:
 
 
 ```python
@@ -59,12 +59,11 @@ experimental = np.array([ 83, 100, 123,  75, 130,  77,  78,  87, 116, 116, 141, 
 
 ```
 
-It is always a good idea to draw the probability distributions for samples to visually inspect the differences present between mean and standard deviation. 
-Plot both samples' distributions and inspect the overlap using seaborn to get an idea of how different the samples might be from one another. 
+It is always a good idea to create a plot of the probability distributions for samples to visually inspect the differences present between mean and standard deviation. Plot both samples' distributions and inspect the overlap using `seaborn` to get an idea of how different the samples might be from one another. 
 
 
 ```python
-# Draw a plot showing overlapping of distribution means and sds for incpection
+# Create a plot showing overlapping of distribution means and sds for inspection
 ```
 
 There are some slight differences between the mean and standard deviation of the control and experimental groups. This is a good sign to further our experimentation and to calculate whether the difference is significant, or not. As a reminder the five steps to performing a hypothesis test are:
@@ -79,7 +78,7 @@ There are some slight differences between the mean and standard deviation of the
 
 In thus drug efficacy experiment example, you can define the null hypothesis to be that there is no difference between a subject taking a placebo and the treatment drug.
 
->**$H_{0}$: The mean difference between treatment and control groups is zero. i.e. $H_{0} = H_{1}$**
+>**$H_{0}$: The mean difference between treatment and control groups is zero. i.e. $\mu_{0} = \mu_{1}$**
 
 ## The Alternate Hypothesis
 
