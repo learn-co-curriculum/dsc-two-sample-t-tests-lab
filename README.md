@@ -1,4 +1,3 @@
-
 # Two Sample T-Test - Lab
 
 ## Introduction
@@ -65,8 +64,8 @@ It is always a good idea to create a plot of the probability distributions for s
 ```python
 sns.set(color_codes=True)
 sns.set(rc={'figure.figsize':(12,10)})
-sns.distplot(control) # Blue distribution
-sns.distplot(experimental) # Green distribution
+sns.histplot(control, kde=True, stat='probability') # Blue distribution
+sns.histplot(experimental, kde=True, stat='probability') # Orange distribution
 ```
 
 
@@ -77,7 +76,9 @@ sns.distplot(experimental) # Green distribution
 
 
 
+    
 ![png](index_files/index_4_1.png)
+    
 
 
 There are some slight differences between the mean and standard deviation of the control and experimental groups. This is a good sign to further our experimentation and to calculate whether the difference is significant, or not. As a reminder the five steps to performing a hypothesis test are:
@@ -241,7 +242,9 @@ visualize_t(t_stat, n_control, n_experimental)
 ```
 
 
+    
 ![png](index_files/index_14_0.png)
+    
 
 
 Now that you have defined your boundaries for significance, you can simply calculate the p-value by calculating the total area under curve using `stats.t.cdf()`. 
