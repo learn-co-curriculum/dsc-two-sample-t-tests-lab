@@ -174,16 +174,7 @@ What is the probability that you would observe this data GIVEN a specified mean 
 You obviously don't know the true mean difference in blood pressure resulting from administration of the drug. The whole point of conducting the experiment is to evaluate the drug. Instead, you must assume that the true mean difference is zero: the null hypothesis $H_{0}$ is assumed to be true:
 
 ## Calculating the t-statistic
-When comparing the difference between groups, we can calculate the two-sample t-statistic like so:
-
-$$\large t = \frac{\bar{x}_{1} - \bar{x}_{2}}{\sqrt{s^{2}_{p} (\frac{1}{n_{1}} + \frac{1}{n_{2}}) }    }  $$
-
-Where $s^{2}_{p}$ is the pooled sample variance, calculated as:
-
-$$\large s^{2}_{p}  = \frac{(n_{1} -1)s^{2}_{1} +  (n_{2} -1)s^{2}_{2}}{n_{1} + n_{2} - 2}  $$
-
-Where $s^{2}_{1}$ and $s^{2}_{2}$ are the variances for each sample given by the formula 
-$$ \large s^{2} = \frac{\sum_{i=1}^{n}(x_{i} - \bar{x})^{2}}{n-1} $$
+<img src="https://curriculum-content.s3.amazonaws.com/data-science/images/t.png/t.png" alt="formulas for t,s,s^2" width="200" height="150" />
 
 
 ## Calculating pooled sample variance
