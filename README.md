@@ -174,7 +174,7 @@ What is the probability that you would observe this data GIVEN a specified mean 
 You obviously don't know the true mean difference in blood pressure resulting from administration of the drug. The whole point of conducting the experiment is to evaluate the drug. Instead, you must assume that the true mean difference is zero: the null hypothesis $H_{0}$ is assumed to be true:
 
 ## Calculating the t-statistic
-<img src="https://curriculum-content.s3.amazonaws.com/data-science/images/t.png/t.png" alt="formulas for t,s,s^2" width="200" height="150" />
+<img src="https://curriculum-content.s3.amazonaws.com/data-science/images/t.png/t.png" alt="formulas for t,s,s^2" />
 
 
 ## Calculating pooled sample variance
